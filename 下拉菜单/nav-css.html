@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉菜单-css实现</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.nav {
+			background-color: #EEE;
+			width: 600px;
+			height: 40px;
+			margin: 0 auto;
+		}
+		.nav ul {
+			list-style-type: none;
+		}
+		.menu a {
+			text-decoration: none;
+			color: #000;
+			display: block;
+			padding: 0 10px;
+			height: 40px;
+		}
+		.menu a:hover {
+			background-color: #666;
+			color: #FFF;
+		}
+		.menu li {
+			float: left;
+			text-align: center;
+			line-height: 40px;
+			position: relative;
+		}
+
+		.subMenu {
+			display: none;
+			position: absolute;
+			left: 0;
+			top: 40px;
+		}
+		.subMenu li {
+			float: none;
+			background-color: #EEE;
+			margin-top: 2px;
+		}
+		.subMenu li a:hover {
+			background-color: #06F;
+		}
+		/*二级菜单的显示和隐藏*/
+		.menu li:hover .subMenu {
+			display: block;
+		}
+		.subMenu li a {
+			*width: 80px;
+		}
+	</style>
+</head>
+<body>
+	<div class="nav">
+		<ul class="menu">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">课程大厅</a>
+				<ul class="subMenu">
+					<li><a href="#">javaScript</a></li>
+					<li><a href="#">jQuery</a></li>
+				</ul>
+			</li>
+			<li><a href="#">学习中心</a>
+				<ul class="subMenu">
+					<li><a href="#">视频学习</a></li>
+					<li><a href="#">案例学习</a></li>
+					<li><a href="#">交流平台</a></li>
+				</ul>
+			</li>
+			<li><a href="#">典型案例</a></li>
+			<li><a href="#">关于我们</a></li>
+		</ul>
+	</div>
+</body>
+</html>

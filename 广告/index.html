@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>广告特效</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#ad {
+			display: none;
+			position: relative;
+			width: 960px;
+			/*height: 386px;*/
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		#ad-cur {
+			width: 960px;
+			height: 68px;
+		}
+		#content {
+			width: 960px;
+			margin: 0 auto;
+		}
+		#close {
+			position: absolute;
+			display: none;
+			text-align: center;
+			height: 20px;
+			width: 20px;
+			background: #cf3;
+			top: 0;
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="ad" class="ad">
+		<img src="image/cur.png" alt="当前广告" id="ad-cur">
+		<img src="image/ad.png" alt="广告" id="ad-con">
+		<span id="close">X</span>
+	</div>
+	<div id="content" class="content">
+		<img src="image/dangdang.jpg" alt="当当网" id="content">
+	</div>
+
+	<script>
+		window.onload = function () {
+			var ad = document.getElementById('ad'),
+				adCon = document.getElementById('ad-con'),
+				adCur = document.getElementById('ad-cur'),
+				close = document.getElementById('close'),
+				minH = adCur.height,
+				maxH = adCon.height,
+				h = 0,
+				step = 6;
+
+			function adDown (){
+				if (h < maxH) {
+					h += step;
+					ad.style.height = h + 'px';
+					ad.style.display = 'block';
+					adCur.style.display = 'none';
+					setTimeout(adDown, 10);
+				} else {
+					setTimeout(adUp, 3000);
+				}
+
+			}
+
+			function adUp () {
+				if (h > minH) {
+					h -= step;
+					ad.style.height = h + 'px';
+					setTimeout(adUp, 10);
+				} else {
+					adCur.style.display = 'block';
+					close.style.display = 'block';
+				}
+			}
+
+			setTimeout(adDown, 1500);
+			close.onclick = function () {
+				ad.style.display = 'none';
+			}
+		}	
+	</script>
+</body>
+</html>

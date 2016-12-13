@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉菜单-javascript实现</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.nav {
+			background-color: #EEE;
+			width: 600px;
+			height: 40px;
+			margin: 0 auto;
+		}
+		.nav ul {
+			list-style-type: none;
+		}
+		.menu a {
+			text-decoration: none;
+			color: #000;
+			display: block;
+			padding: 0 10px;
+			height: 40px;
+		}
+		.menu a:hover {
+			background-color: #666;
+			color: #FFF;
+		}
+		.menu li {
+			float: left;
+			text-align: center;
+			line-height: 40px;
+			position: relative;
+		}
+
+		.subMenu {
+			display: none;
+			position: absolute;
+			left: 0;
+			top: 40px;
+			height: 0px;
+			overflow: hidden;
+		}
+		.subMenu li {
+			float: none;
+			background-color: #EEE;
+			margin-top: 2px;
+		}
+		.subMenu li a:hover {
+			background-color: #06F;
+		}
+		.subMenu li a {
+			*width: 80px;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			//获取menu下的li
+			var menu = document.getElementById("menu");
+			var li = menu.getElementsByTagName("li");
+			//遍历menuLi并添加事件
+			for (var i = 0; i < li.length; i++) {
+				li[i].onmouseover = function () {
+					var u = this.getElementsByTagName("ul")[0];
+					if (u != undefined) {
+						u.style.display = "block";
+						addH(u.id);
+					}
+				}
+				li[i].onmouseleave = function () {
+					var u = this.getElementsByTagName("ul")[0];
+					if (u != undefined) {
+						subH(u.id);
+					}
+				}
+			}
+		}
+		function addH(id) {
+			var u = document.getElementById(id);
+			var h = u.offsetHeight;
+			h += 3;
+			if(h < 126){
+				u.style.height = h + "px";
+				setTimeout("addH('"+ id +"')",10);
+			} else {
+				return;
+			}
+		}
+		function subH(id) {
+			var u = document.getElementById(id);
+			var h = u.offsetHeight;
+			h -= 4;
+			if(h > 0){
+				u.style.height = h + "px";
+				setTimeout("subH('"+ id +"')",5);
+			} else {
+				u.style.display = "none";
+				return;
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<div class="nav">
+		<ul id="menu" class="menu">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">课程大厅</a></li>
+			<li><a href="#">学习中心</a>
+				<ul id="subMenu" class="subMenu">
+					<li><a href="#">视频学习</a></li>
+					<li><a href="#">案例学习</a></li>
+					<li><a href="#">交流平台</a></li>
+				</ul>
+			</li>
+			<li><a href="#">典型案例</a></li>
+			<li><a href="#">关于我们</a></li>
+		</ul>
+	</div>
+</body>
+</html>

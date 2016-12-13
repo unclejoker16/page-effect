@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>Javascript 返回顶部</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#btn {
+			width:40px;
+			height:40px;
+			position:fixed;
+			right:30px;
+			bottom:10px;
+			display:none;
+			background:url(image/top_bg.png) no-repeat left top;
+		}
+		#btn:hover {
+			background:url(image/top_bg.png) no-repeat 0 -39px;
+		}
+		.bg {
+			width:1190px; 
+			margin:0 auto;
+		}
+	</style>
+</head>
+<body>
+	<a href="javascript:;" id="btn" title="回到顶部"></a>
+	<div class="bg">
+		<img src="image/tb_bg.jpg" alt="" />
+	</div>
+	<script>
+		window.onload = function () {
+			var h= document.documentElement.clientHeight || document.body.clientHeight;
+			var btn = document.getElementById('btn');
+			btn.onclick = function () {
+				var timer = setInterval(function () {
+					var top = document.documentElement.scrollTop || document.body.scrollTop;
+					var speed = top/6;
+					document.documentElement.scrollTop = document.body.scrollTop = top - speed;
+					if (top == 0) {
+						clearInterval(timer);
+					}
+				},10);
+			}
+			window.onscroll = function () {
+				var top = document.documentElement.scrollTop || document.body.scrollTop;
+				if (top > h) {
+					btn.style.display = 'block';
+				} else {
+					btn.style.display = 'none';
+				}
+			}
+		}
+	</script>
+</body>
+</html>
